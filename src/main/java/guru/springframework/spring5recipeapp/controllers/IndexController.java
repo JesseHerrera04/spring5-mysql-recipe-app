@@ -15,6 +15,8 @@ public class IndexController {
     // Show the view using Thymeleaf template, and request mapping
     @RequestMapping({"", "/", "index"})
     public String getIndexPage() {
+
+        System.out.println("Some message to say....12345678!!!!");
         return "index";
     } // End getIndexPage()
 } // End IndexController Class
