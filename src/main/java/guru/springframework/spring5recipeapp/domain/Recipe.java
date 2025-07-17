@@ -2,6 +2,8 @@ package guru.springframework.spring5recipeapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 /**
  * Created on 7/16/2025 by Jesse H.
  * Package: Domain; Class: Recipe
@@ -24,6 +26,9 @@ public class Recipe {
     private String directions;
     //TODO add
     //private Difficulty difficulty
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
@@ -95,6 +100,14 @@ public class Recipe {
     public void setDirections(String directions) {
         this.directions = directions;
     } // End setDirections()
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    } // End getIngredients()
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    } // End setIngredients()
 
     public Byte[] getImage() {
         return image;
