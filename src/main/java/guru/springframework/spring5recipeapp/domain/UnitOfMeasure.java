@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 /**
- * Created on 7/16/2025 by [Insert Author Here].
+ * Created on 7/16/2025 by Jesse H.
  * Package: Domain; Class: UnitOfMeasure
  * Pojo/Entity for Unit of Measure
  */
