@@ -31,7 +31,14 @@ public class Ingredient {
     public Ingredient() {
     } // End Ingredient()
 
-    // Constructor for Ingredient
+    // Constructor for Ingredient (3 params)
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+    } // End Ingredient()
+
+    // Constructor for Ingredient (4 params with Recipe)
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
         this.description = description;
         this.amount = amount;
