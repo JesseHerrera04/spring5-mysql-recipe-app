@@ -1,6 +1,7 @@
 package guru.springframework.spring5recipeapp.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
  * POJO/Entity for Ingredient
  */
 
+@Data
 @Entity
 public class Ingredient {
 
@@ -46,43 +48,4 @@ public class Ingredient {
         this.recipe = recipe;
     } // End Ingredient()
 
-    public Long getId() {
-        return id;
-    } // End getId()
-
-    public void setId(Long id) {
-        this.id = id;
-    } // End setId()
-
-    public String getDescription() {
-        return description;
-    } // End getDescription()
-
-    public void setDescription(String description) {
-        this.description = description;
-    } // End setDescription()
-
-    public BigDecimal getAmount() {
-        return amount;
-    } // End getAmount()
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    } // End setAmount()
-
-    public UnitOfMeasure getUom() {
-        return uom;
-    } // End getUom()
-
-    public void setUom(UnitOfMeasure uom) {
-        this.uom = uom;
-    } // End setUom()
-
-    public Recipe getRecipe() {
-        return recipe;
-    } // End getRecipe()
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    } // End setRecipe()
 } // End Ingredient Class
