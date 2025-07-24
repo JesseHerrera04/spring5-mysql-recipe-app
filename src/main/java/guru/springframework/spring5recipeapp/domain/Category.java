@@ -1,6 +1,7 @@
 package guru.springframework.spring5recipeapp.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import java.util.Set;
  * POJO/Entity for Recipe Category
  */
 
+@Data
 @Entity
 public class Category {
 
@@ -21,28 +23,4 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Set<Recipe> recipes;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    } // End getId()
-
-    public void setId(Long id) {
-        this.id = id;
-    } // End setId()
-
-    public String getDescription() {
-        return description;
-    } // End getDescription()
-
-    public void setDescription(String description) {
-        this.description = description;
-    } // End setDescription()
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    } // End getRecipes()
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    } // End setRecipes()
 } // End Category Class

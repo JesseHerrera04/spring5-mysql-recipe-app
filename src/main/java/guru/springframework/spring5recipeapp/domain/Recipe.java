@@ -1,6 +1,7 @@
 package guru.springframework.spring5recipeapp.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
  * POJO/Entity for Recipes
  */
 
+@Data
 @Entity
 public class Recipe {
 
@@ -46,99 +48,8 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    } // End getId()
 
-    public void setId(Long id) {
-        this.id = id;
-    } // End setId()
-
-    public String getDescription() {
-        return description;
-    } // End getDescription()
-
-    public void setDescription(String description) {
-        this.description = description;
-    } // End setDescription()
-
-    public Integer getPrepTime() {
-        return prepTime;
-    } // End getPrepTime()
-
-    public void setPrepTime(Integer prepTime) {
-        this.prepTime = prepTime;
-    } // End setPrepTime()
-
-    public Integer getCookTime() {
-        return cookTime;
-    } // End getCookTime()
-
-    public void setCookTime(Integer cookTime) {
-        this.cookTime = cookTime;
-    } // End setCookTime()
-
-    public Integer getServings() {
-        return servings;
-    } // End getServings()
-
-    public void setServings(Integer servings) {
-        this.servings = servings;
-    } // End setServings()
-
-    public String getSource() {
-        return source;
-    } // End getSource()
-
-    public void setSource(String source) {
-        this.source = source;
-    } // End setSource()
-
-    public String getUrl() {
-        return url;
-    } // End getUrl()
-
-    public void setUrl(String url) {
-        this.url = url;
-    } // End setUrl()
-
-    public String getDirections() {
-        return directions;
-    } // End getDirections()
-
-    public void setDirections(String directions) {
-        this.directions = directions;
-    } // End setDirections()
-
-    public Set<Ingredient> getIngredients() {
-        return ingredients;
-    } // End getIngredients()
-
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    } // End setIngredients()
-
-    public Byte[] getImage() {
-        return image;
-    } // End getImage()
-
-    public void setImage(Byte[] image) {
-        this.image = image;
-    } // End setImage()
-
-    public Difficulty getDifficulty() {
-        return difficulty;
-    } // End getDifficulty()
-
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    } // End setDifficulty()
-
-    public Notes getNotes() {
-        return notes;
-    } // End getNotes()
-
+    // Helper Methods
     public void setNotes(Notes notes) {
         this.notes = notes;
         notes.setRecipe(this);
@@ -149,12 +60,4 @@ public class Recipe {
         this.ingredients.add(ingredient);
         return this;
     } // End addIngredient()
-
-    public Set<Category> getCategories() {
-        return categories;
-    } // End getCategories()
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    } // End setCategories()
 } // End Recipe Class
