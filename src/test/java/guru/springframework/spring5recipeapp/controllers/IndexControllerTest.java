@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created on 7/28/2025 by Jesse H.
  * Package: Controllers (Test); Class: IndexControllerTest
- * Unit Test for Model View Controller
+ * Integration Test for Model View Controller
  */
 
 class IndexControllerTest {
