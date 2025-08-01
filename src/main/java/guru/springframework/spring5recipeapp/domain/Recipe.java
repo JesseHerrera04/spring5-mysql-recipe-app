@@ -51,8 +51,10 @@ public class Recipe {
 
     // Helper Methods
     public void setNotes(Notes notes) {
-        this.notes = notes;
-        notes.setRecipe(this);
+        if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     } // End setNotes()
 
     public Recipe addIngredient(Ingredient ingredient) {
