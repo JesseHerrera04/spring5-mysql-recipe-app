@@ -5,10 +5,7 @@ import guru.springframework.spring5recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created on 7/31/2025 by Jesse H.
@@ -56,5 +53,15 @@ public class RecipeController {
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(command);
 
         return "redirect:/recipe/" + savedRecipeCommand.getId() + "/show";
+    }
+
+    @GetMapping("/recipe/{id}/delete")
+    public String deleteById(@PathVariable String id) {
+
+        log.debug("Deleting id: " + id);
+
+        recipeService.deleteById(Long.valueOf(id));
+
+        return "redirect:/";
     }
 }
