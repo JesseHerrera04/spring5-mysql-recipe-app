@@ -16,7 +16,7 @@
             th:src="@{/webjars/bootstrap/5.3.7/js/bootstrap.min.js}"></script>
 
 </head>
-<!--/*@thymesVar id="recipe" type"guru.springframework.domain.Recipe"*/-->
+<!--/*@thymesVar id="recipe" type="guru.springframework.domain.Recipe"*/-->
 <body>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="justify-content-center">
@@ -95,16 +95,17 @@
                                     <h2 class="card-title">Ingredients</h2>
                                 </div>
                                 <div class="col-md-1">
-                                    <a class="btn btn-light" href="#" role="button">Edit</a>
+                                    <a class="btn btn-light" href="#" role="button">View</a>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <ul>
+                                    <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:remove="all">1 Teaspoon of chocolate</li>
+                                        <li th:remove="all">asdf</li>
                                         <li th:each="ingredient : ${recipe.ingredients}"
                                             th:text="${(ingredient.getAmount() +
                                         ' ' + ingredient.uom.getDescription() +
