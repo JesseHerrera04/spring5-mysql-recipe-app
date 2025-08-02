@@ -1,8 +1,9 @@
 package guru.springframework.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Set;
@@ -13,7 +14,8 @@ import java.util.Set;
  * POJO/Entity for Recipe Category
  */
 
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(exclude = {"recipes"})
 @ToString(exclude = {"recipes"})
 @Entity

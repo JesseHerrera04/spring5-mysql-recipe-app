@@ -4,7 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created on 7/16/2025 by Jesse H.
@@ -12,7 +13,8 @@ import lombok.Data;
  * Pojo/Entity for Unit of Measure
  */
 
-@Data
+@Getter
+@Setter
 @Entity
 public class UnitOfMeasure {
 

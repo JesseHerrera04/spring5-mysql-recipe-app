@@ -1,7 +1,8 @@
 package guru.springframework.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,8 @@ import java.util.Set;
  * POJO/Entity for Recipes
  */
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Recipe {
 
