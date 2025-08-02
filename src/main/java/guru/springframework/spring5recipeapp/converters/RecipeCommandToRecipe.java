@@ -1,6 +1,7 @@
 package guru.springframework.spring5recipeapp.converters;
 
 import guru.springframework.spring5recipeapp.commands.RecipeCommand;
+import guru.springframework.spring5recipeapp.domain.Notes;
 import guru.springframework.spring5recipeapp.domain.Recipe;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -46,6 +47,14 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         recipe.setSource(source.getSource());
         recipe.setUrl(source.getUrl());
         recipe.setNotes(notesConverter.convert(source.getNotes()));
+
+        if(source.getNotes() != null) {
+            Notes notes = notesConverter.convert(source.getNotes());
+            if(notes != null) {
+                notes.setRecipe(recipe);
+                recipe.setNotes(notes);
+            }
+        }
 
         if (source.getCategories() != null && source.getCategories().size() > 0){
             source.getCategories()
