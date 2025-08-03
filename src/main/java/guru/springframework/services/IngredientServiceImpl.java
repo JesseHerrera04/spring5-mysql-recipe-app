@@ -27,12 +27,14 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
-    public IngredientServiceImpl(IngredientToIngredientCommand ingredientToIngredientCommand, IngredientCommandToIngredient ingredientCommandToIngredient, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public IngredientServiceImpl(IngredientToIngredientCommand ingredientToIngredientCommand, IngredientCommandToIngredient ingredientCommandToIngredient, RecipeRepository recipeRepository, UnitOfMeasureRepository unitOfMeasureRepository, RecipeService recipeService) {
         this.ingredientToIngredientCommand = ingredientToIngredientCommand;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.recipeService = recipeService;
     }
 
     @Override
@@ -113,6 +115,26 @@ public class IngredientServiceImpl implements IngredientService {
 
             //to do check for fail
             return ingredientToIngredientCommand.convert(savedIngredientOptional.get());
+        }
+    }
+    @Override
+    @Transactional
+    public void deleteById(Long recipeId, Long ingredientId) {
+        log.debug("Deleting ingredient: {}:{}", recipeId, ingredientId);
+    
+        Recipe recipe = recipeService.findById(recipeId);
+    
+        Optional<Ingredient> ingredientOptional = recipe.getIngredients().stream()
+            .filter(ingredient -> ingredient.getId().equals(ingredientId))
+            .findFirst();
+            
+        if (ingredientOptional.isPresent()) {
+            Ingredient ingredientToDelete = ingredientOptional.get();
+            ingredientToDelete.setRecipe(null);
+            recipe.getIngredients().remove(ingredientToDelete);
+            recipeRepository.save(recipe);
+        } else {
+            throw new RuntimeException("Ingredient not found for ID: " + ingredientId);
         }
     }
 }
