@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Handler for NotFoundException
  */
 
-@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Not Found")
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {
 
     public NotFoundException() {
