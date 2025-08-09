@@ -81,4 +81,20 @@ public class RecipeController {
 
         return modelAndView;
     }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormatException(Exception exception){
+
+        log.error("Handling Bad Request Exception");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("400error");
+        // Due to Spring's and Thymeleaf's Security configs, .getMessage will fail
+        // in the 400error template. Pass it as a string and call that instead
+        modelAndView.addObject("exceptionMessage", exception.getMessage());
+
+        return modelAndView;
+    }
 }
