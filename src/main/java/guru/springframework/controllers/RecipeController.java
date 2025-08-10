@@ -59,7 +59,7 @@ public class RecipeController {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error ->
-                    log.error(error.toString())
+                    log.debug(error.toString())
             );
 
             return RECIPE_RECIPEFORM_URL;
