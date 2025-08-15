@@ -1,0 +1,83 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+executors:
+  maven-executor:
+    docker:
+      - image: cimg/openjdk:21.0
+    working_directory: ~/spring5-recipe-app
+
+jobs:
+  unit-tests:
+    executor: maven-executor
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+
+      # Restore Maven dependencies cache
+      - restore_cache:
+          keys:
+            - maven-{{ checksum "pom.xml" }}
+            - maven-
+
+      # Install dependencies offline
+      - run:
+          name: Install dependencies
+          command: mvn install -DskipTests
+
+      # Save Maven cache
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: maven-{{ checksum "pom.xml" }}
+
+      # Run unit tests (Surefire)
+      - run:
+          name: Unit Tests
+          command: mvn test
+
+      # Generate JaCoCo report for unit tests
+      - run:
+          name: JaCoCo Report
+          command: mvn jacoco:report
+
+      # Save JaCoCo HTML reports as artifacts
+      - store_artifacts:
+          path: target/site/jacoco
+          destination: unit-tests-coverage
+
+  integration-tests:
+    executor: maven-executor
+    steps:
+      - checkout
+
+      # Restore Maven dependencies cache
+      - restore_cache:
+          keys:
+            - maven-{{ checksum "pom.xml" }}
+            - maven-
+
+      # Run integration tests (Failsafe)
+      - run:
+          name: Integration Tests
+          command: mvn verify
+
+      # Generate JaCoCo report for integration tests
+      - run:
+          name: JaCoCo Report
+          command: mvn jacoco:report
+
+      # Save JaCoCo HTML reports as artifacts
+      - store_artifacts:
+          path: target/site/jacoco
+          destination: integration-tests-coverage
+
+workflows:
+  build-and-test:
+    jobs:
+      - unit-tests
+      - integration-tests:
+          requires:
+            - unit-tests
