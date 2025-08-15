@@ -1,3 +1,4 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/JesseHerrera04/spring5-mysql-recipe-app/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/JesseHerrera04/spring5-mysql-recipe-app/tree/master)
 # spring5-mysql-recipe-app
 Recipe Web Application Spring Project Using MySQL as database
 
