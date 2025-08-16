@@ -9,6 +9,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
     show-sql: true
+# Uncomment bellow only if MySQL instance is new or DB deleted
 #    properties:
 #      jakarta:
 #        persistence:
@@ -16,7 +17,8 @@ spring:
 #            create-source: metadata
 #            scripts:
 #              action: create
-#              create-target: guru_database_create.sql
-#  sql:
-#    init:
-#      mode: always
+#              create-target: src/main/resources/scripts/guru_database_create.sql
+  sql:
+    init:
+      mode: always
+      platform: mysql
