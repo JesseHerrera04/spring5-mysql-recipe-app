@@ -9,7 +9,7 @@ executors:
     working_directory: ~/spring5-recipe-app
 
 jobs:
-  unit-tests:
+  build-and-test:
     executor: maven-executor
     environment:
       MAVEN_OPTS: -Xmx3200m
@@ -33,51 +33,22 @@ jobs:
             - ~/.m2
           key: maven-{{ checksum "pom.xml" }}
 
-      # Run unit tests (Surefire)
+      # Run all tests (unit + integration) and generate JaCoCo coverage
       - run:
-          name: Unit Tests
-          command: mvn test
-
-      # Generate JaCoCo report for unit tests
-      - run:
-          name: JaCoCo Report
-          command: mvn jacoco:report
+          name: Run Tests with JaCoCo
+          command: mvn verify jacoco:report
 
       # Save JaCoCo HTML reports as artifacts
       - store_artifacts:
           path: target/site/jacoco
-          destination: unit-tests-coverage
+          destination: coverage-report
 
-  integration-tests:
-    executor: maven-executor
-    steps:
-      - checkout
-
-      # Restore Maven dependencies cache
-      - restore_cache:
-          keys:
-            - maven-{{ checksum "pom.xml" }}
-            - maven-
-
-      # Run integration tests (Failsafe)
+      # Upload to Codecov
       - run:
-          name: Integration Tests
-          command: mvn verify
-
-      # Generate JaCoCo report for integration tests
-      - run:
-          name: JaCoCo Report
-          command: mvn jacoco:report
-
-      # Save JaCoCo HTML reports as artifacts
-      - store_artifacts:
-          path: target/site/jacoco
-          destination: integration-tests-coverage
+          name: Upload Coverage to Codecov
+          command: bash <(curl -s https://codecov.io/bash)
 
 workflows:
   build-and-test:
     jobs:
-      - unit-tests
-      - integration-tests:
-          requires:
-            - unit-tests
+      - build-and-test

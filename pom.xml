@@ -130,16 +130,16 @@
                         </goals>
                     </execution>
 
-                    <!-- Generate coverage report after tests -->
+                    <!-- Generate coverage report after all tests -->
                     <execution>
                         <id>report</id>
-                        <phase>prepare-package</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
 
-                    <!-- Optional: check coverage thresholds -->
+                    <!-- Optional: enforce coverage thresholds -->
                     <execution>
                         <id>check</id>
                         <goals>
@@ -162,7 +162,8 @@
                     </execution>
                 </executions>
             </plugin>
-		</plugins>
+
+        </plugins>
 	</build>
 
 </project>
