@@ -9,3 +9,14 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     database: mysql
     show-sql: true
+#    properties:
+#      jakarta:
+#        persistence:
+#          schema-generation:
+#            create-source: metadata
+#            scripts:
+#              action: create
+#              create-target: guru_database_create.sql
+#  sql:
+#    init:
+#      mode: always
